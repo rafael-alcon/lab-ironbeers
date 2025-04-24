@@ -33,7 +33,16 @@ app.get('/beers', (req,res)=>{
 })
 
 app.get('/random-beer', (req,res)=>{
-  res.render('random-beer')
+  fetch("https://ih-beers-api2.herokuapp.com/beers")
+  .then(response1 => response1.json())
+  .then(response =(response1) =>{
+    const claves = Object.keys(response1);
+    const claveAleatoria = claves[Math.floor(Math.random() * claves.length)];
+    return response1[claveAleatoria];
+  })
+  .then(response => res.render('random-beer',{response}))
+ // .then(response => res.send({response}))
+  .catch(error => console.log(error));
 })
 
 app.listen(3000, () => console.log('🏃‍ on port 3000'));

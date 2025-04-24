@@ -16,9 +16,11 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 .btn-class{
-    padding-top: 50px;
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-around
+    
+    
     
 }
 
