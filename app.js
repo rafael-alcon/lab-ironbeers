@@ -11,6 +11,7 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('images', express.static(path.join(__dirname, '/public/images')))
 
 // Register the location for handlebars partials here:
 
@@ -21,5 +22,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
   res.render('index');
 });
+
+app.get('/beers', (req,res)=>{
+ 
+  fetch("https://ih-beers-api2.herokuapp.com/beers")
+  .then(response => response.json())
+  .then(beersFromApi => res.render('beers', {beersFromApi}))
+  .catch(error => console.log(error));
+  
+})
+
+app.get('/random-beer', (req,res)=>{
+  res.render('random-beer')
+})
 
 app.listen(3000, () => console.log('🏃‍ on port 3000'));
